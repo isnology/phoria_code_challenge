@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :profile, only: [:show, :create, :update]
       resources :shop, only: [:index, :show]
-      resources :cart, only: [:index, :show, :create, :update, :delete]
+      resources :cart, only: [:index, :show, :create, :update, :destroy]
       resources :order, only: [:index, :show, :create, :update]
     end
     
