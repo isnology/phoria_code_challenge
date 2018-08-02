@@ -41,7 +41,7 @@ class Api::V1::CartController < ApiController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cart_params
-    params.require(:cart).permit(:item_id, :quantity, :user_id)
+    params.require(:shoppingCart).permit(:item_id, :quantity, :user_id)
   end
 
   def set_cart

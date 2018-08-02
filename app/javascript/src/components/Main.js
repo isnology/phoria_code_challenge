@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import  SignInPage  from './SignInPage'
-import  SignedInPage  from './SignedInPage'
+import Shop from './shop/Shop'
 
 
 export default function Main({ app }) {
@@ -15,8 +15,8 @@ export default function Main({ app }) {
             <SignInPage app={app} />
           )}/>
           
-          <Route path='/app' exact render={ () => (
-            <SignedInPage app={app} />
+          <Route path='/shop' exact render={ () => (
+            <Shop app={app} />
           )}/>
         
         </Switch>

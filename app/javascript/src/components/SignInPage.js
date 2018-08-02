@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
 import { signIn, signUp } from '../api/auth'
-import Button from './Button'
+import Button from './shared/Button'
 
 
 export default function SignInPage({ app }) {
@@ -15,7 +15,7 @@ export default function SignInPage({ app }) {
         password: elements.password.value
       }
     }
-    if (app.state.signUp) {
+    if (app.state.toSignUp) {
       data.user.password_confirmation = elements.passwordConfirmation.value
       return signUp(data)
       .then((res) => onSignIn(res))
@@ -32,12 +32,12 @@ export default function SignInPage({ app }) {
   }
 
   function onClick() {
-    app.setState({ signUp: !app.state.signUp })
+    app.setState({ toSignUp: !app.state.toSignUp })
   }
   
-  if (app.signedIn()) {return <Redirect to="/app" />}
+  if (app.signedIn()) {return <Redirect to="/shop" />}
   
-  const { signUp } = app.state
+  const { toSignUp } = app.state
   
   return (
     <Fragment>
@@ -62,7 +62,7 @@ export default function SignInPage({ app }) {
           />
         </label>
         </div>
-        { signUp &&
+        { toSignUp &&
           <div className="form-label">
           <label >
             {'Re-type Password: '}
@@ -75,9 +75,9 @@ export default function SignInPage({ app }) {
           </div>
         }
         <br />
-        <Button>Sign {signUp && 'Up'} {!signUp && 'In'}</Button>
+        <Button>Sign {toSignUp && 'Up'} {!toSignUp && 'In'}</Button>
       </form>
-      <Button onClick={ onClick }>{signUp && 'Back to Sign In'} {!signUp && 'Sign Up'}</Button>
+      <Button onClick={ onClick }>{toSignUp && 'Back to Sign In'} {!toSignUp && 'Sign Up'}</Button>
     </Fragment>
   )
 

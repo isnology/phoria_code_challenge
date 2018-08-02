@@ -1,11 +1,11 @@
 class Api::V1::ShopController < ApiController
   def index
-    data = {
+    shop = {
       items: Item.all,
       tax: Tax.find_by('GST'),
       promotions: Promotion.all
     }
-    render json: data, status: :ok
+    render json: shop, status: :ok
   end
 
   def show
