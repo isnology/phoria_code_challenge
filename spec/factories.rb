@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :tax do
+    type ""
+    rate 1.5
+  end
   factory :profile do
     first_name "John"
     last_name "Doe"

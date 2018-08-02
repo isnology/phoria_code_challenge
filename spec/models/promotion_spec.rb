@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  quantity       :integer
-#  discount       :integer
+#  discount       :float
 #  shipping_cents :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

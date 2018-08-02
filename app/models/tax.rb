@@ -1,15 +1,13 @@
 # == Schema Information
 #
-# Table name: profiles
+# Table name: taxes
 #
 #  id         :integer          not null, primary key
-#  first_name :string
-#  last_name  :string
-#  user_id    :integer
+#  category   :string
+#  rate       :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Profile < ApplicationRecord
-  belongs_to :user
+class Tax < ApplicationRecord
 end

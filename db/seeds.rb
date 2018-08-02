@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Item.create([
+  {name: 'VR Cardboard', quality: 'High', price_cents: 2000},
+  {name: 'VR Cardboard', quality: 'Premium', price_cents: 3000}
+            ])
+
+Tax.create({category: 'GST', rate: 0.1})
+
+Promotion.create([
+  {quantity: 0, discount: 1.0, shipping_cents: 3000},
+  {quantity: 9, discount: 1.0, shipping_cents: 0},
+  {quantity: 20, discount: 0.9, shipping_cents: 0}
+                 ])

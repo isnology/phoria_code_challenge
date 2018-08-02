@@ -4,7 +4,6 @@ class CreateLines < ActiveRecord::Migration[5.1]
       t.references :item, foreign_key: true
       t.string :quantity
       t.integer :price_cents
-      t.integer :discount
       t.references :order, foreign_key: true
 
       t.timestamps

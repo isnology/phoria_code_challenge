@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180801164215) do
+ActiveRecord::Schema.define(version: 20180802025719) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "item_id"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20180801164215) do
     t.integer "item_id"
     t.string "quantity"
     t.integer "price_cents"
-    t.integer "discount"
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,6 +42,8 @@ ActiveRecord::Schema.define(version: 20180801164215) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.float "discount"
+    t.integer "shipping_cents"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,10 +61,19 @@ ActiveRecord::Schema.define(version: 20180801164215) do
 
   create_table "promotions", force: :cascade do |t|
     t.integer "quantity"
-    t.integer "discount"
+    t.float "discount"
     t.integer "shipping_cents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["quantity"], name: "index_promotions_on_quantity", unique: true
+  end
+
+  create_table "taxes", force: :cascade do |t|
+    t.string "category"
+    t.float "rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_taxes_on_category", unique: true
   end
 
   create_table "users", force: :cascade do |t|
