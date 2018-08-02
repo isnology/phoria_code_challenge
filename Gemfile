@@ -11,6 +11,7 @@ gem 'dotenv-rails', groups: [:development, :test], require: 'dotenv/rails-now'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
 # gem 'pg', '~> 0.18'
+
 gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
@@ -24,6 +25,7 @@ gem 'webpacker'
 # gem 'therubyracer', platforms: :ruby
 gem 'active_model_serializers', '~> 0.9.7'
 gem 'devise'
+gem 'annotate'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -40,9 +42,10 @@ gem 'turbolinks', '~> 5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.7'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do

@@ -13,7 +13,15 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+require 'factory_bot'
+require 'devise'
+require 'support/request_helpers'
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+  config.include Devise::TestHelpers, type: :controller
+  config.include Requests::JsonHelpers, type: :controller
+  
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
