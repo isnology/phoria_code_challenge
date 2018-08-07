@@ -2,20 +2,14 @@ Rails.application.routes.draw do
   
   root "init#index"
   devise_for :users, defaults: { format: :json }
-
-  namespace :api, defaults: { format: :json } do
-    namespace :v1 do
-      resources :profile, only: [:show, :create, :update]
-      resources :shop, only: [:index, :show]
-      resources :cart, only: [:index, :show, :create, :update, :destroy]
-      resources :order, only: [:index, :show, :create, :update]
-    end
-    
-    scope :auth do
-      get 'is_signed_in', to: 'auth#index'
-    end
-  end
   
+  namespace :v1, defaults: { format: :json } do
+    resources :profile, only: [:show, :create, :update]
+    resources :shop, only: [:index, :show]
+    resources :cart, only: [:index, :show, :create, :update, :destroy]
+    resources :order, only: [:index, :show, :create, :update]
+    get 'is_signed_in', to: 'auth#index'
+  end
   
   get '*path', to: 'init#index'
   

@@ -2,7 +2,7 @@ import api, { csrf } from './init'
 
 
 export function isSignedIn() {
-  return api.get("/api/auth/is_signed_in")
+  return api.get("/v1/is_signed_in")
   .then((res) => res.data)
 }
 

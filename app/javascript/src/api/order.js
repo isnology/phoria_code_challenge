@@ -3,23 +3,24 @@ import api, { csrf } from './init'
 
 export function orderIndex() {
   csrf()
-  return api.get('/api/v1/order')
+  return api.get('/v1/order')
   .then((res) => {
-    return res.data.order
+    return res.data
   })
 }
 
 export function orderShow(id) {
   csrf()
-  return api.get(`/api/v1/order/${id}`)
+  return api.get(`/v1/order/${id}`)
   .then((res) => {
     return res.data.order
   })
 }
 
-export function orderCreate(data) {
+// order is created from carts table (nothing to pass)
+export function orderCreate() {
   csrf()
-  return api.post('/api/v1/order', data)
+  return api.post('/v1/order')
   .then((res) => {
     return res.data.order
   })
@@ -27,7 +28,7 @@ export function orderCreate(data) {
 
 export function orderUpdate(id, data) {
   csrf()
-  return api.put(`/api/v1/order/${id}`, data)
+  return api.put(`/v1/order/${id}`, data)
   .then((res) => {
     return res.data.order
   })

@@ -14,4 +14,5 @@ class Item < ApplicationRecord
   has_many :lines
   has_many :carts
   has_many :orders, through: :lines
+  has_many :users, through: :carts
 end

@@ -11,4 +11,8 @@
 #
 
 class Promotion < ApplicationRecord
+  
+  def self.record(user)
+    Promotion.where('quantity < ?', Cart.total(user)).order(quantity: :desc).first
+  end
 end

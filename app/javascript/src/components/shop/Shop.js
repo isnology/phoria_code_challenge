@@ -2,36 +2,68 @@ import React, { Component, Fragment } from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import Header from '../shared/Header'
 import Cards from './Cards'
-import Bottom from './Bottom'
+import Footer from './Footer'
 import ShoppingCart from '../shoppingCart/ShoppingCart'
 import Button from '../shared/Button'
+import { cartCreate, cartDelete } from "../../api/cart"
+import _cloneDeep from 'lodash-es/cloneDeep'
 
 
-export default function Shop({ app }) {
-  if (!app.signedIn()) {return (<Redirect to="/" />)}
+export default class Shop extends Component {
   
-  const display = app.state.displayCart
+  app = this.props.app
   
-  function onClick() {
-    app.setState({displayCart: !display})
+  onClick = () => {
+    this.app.setState(prevState => { return {displayCart: !prevState.displayCart}})
   }
   
-  return (
-    <div className="shop">
-      <Header>
-        <div className="btn btn--navbar" onClick={app.onSignOut}>
-          Sign Out
+  onAddCart = (card, index) => {
+    const cart = {
+      item_id: card.id,
+      quantity: parseInt(this.app.state.cards[index].quantity, 10),
+    }
+    cartCreate(cart)
+    .then((carts) => {
+      const shopCarts = _cloneDeep(carts)
+      this.app.setState(prevState => {
+        let cards = prevState.cards
+        cards[index].quantity = 1
+        return {carts, cards, shopCarts }
+    })})
+  }
+  
+  onQuantityChange = (index, event) => {
+    const value = event.target.value
+    this.app.setState(prevState => {
+      let cards = prevState.cards
+      cards[index].quantity = parseInt(value, 10) ? parseInt(value, 10) : 0
+      return {cards}
+    })
+  }
+  
+  
+  render() {
+    if (!this.app.signedIn()) {return (<Redirect to="/"/>)}
+  
+    const display = this.app.state.displayCart
+    return (
+      <div className="shop">
+        <Header>
+          <div className="btn btn--navbar" onClick={ this.app.onSignOut }>
+            Sign Out
+          </div>
+          { !display &&
+            <div className="btn btn--navbar" onClick={ this.onClick }>
+              Shopping Cart
+            </div>
+          }
+        </Header>
+        <div className="shop_window">
+          <Cards app={ this.app } page={ this }/>
         </div>
-        <div className="btn btn--navbar" onClick={onClick} >
-          { display ? "Close Cart" : "Shopping Cart"}
-        </div>
-      </Header>
-      <div className="shop_window">
-        <Cards app={ app }/>
-        <div className="shop_window_bottom-spacer"/>
-        <Bottom/>
-        <ShoppingCart app={app} />
+        <Footer/>
+        <ShoppingCart app={ this.app }/>
       </div>
-    </div>
-  )
+    )
+  }
 }

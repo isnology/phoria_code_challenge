@@ -12,7 +12,7 @@ export default function Header({children}) {
   return (
     <div className="header">
       <div className="header_logo">
-        <h1 className="header_logo">VR Cardboard</h1>
+        <h1 className="header_logo">Cardboard Warehouse</h1>
       </div>
       
       <div className="header_nav">
