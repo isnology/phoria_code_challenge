@@ -2,9 +2,9 @@ import React, { Component, Fragment } from 'react'
 import { isSignedIn, signOut } from './api/auth'
 import Main from './components/Main'
 import { shopIndex } from './api/shop'
-import { cartCreate, cartIndex } from './api/cart'
+import { cartIndex } from './api/cart'
+import { orderIndex } from './api/order'
 import _cloneDeep from 'lodash-es/cloneDeep'
-import {Link, Redirect} from 'react-router-dom'
 
 
 export default class App extends Component {
@@ -19,6 +19,7 @@ export default class App extends Component {
     shippingCents: 0,
     displayCart: false,
     shopCarts: [],
+    orders: [],
   }
   
   signedIn = () => (!!this.state.user)
@@ -83,6 +84,13 @@ export default class App extends Component {
     } else {
       this.setState({discount: 1, shippingCents: 3000})
     }
+  }
+  
+  onLoadOrder = () => {
+    return orderIndex()
+    .then((orders) => {
+      this.setState({orders})
+    })
   }
   
   render() {

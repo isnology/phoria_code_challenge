@@ -5,9 +5,9 @@ import {Link, Redirect} from 'react-router-dom'
 
 export default function Cart({ app, page, index, cart }) {
   
-  const price = parseFloat(parseFloat(cart.item.price_cents/100 * app.state.shopCarts[index].quantity).toFixed(2))
-  const sell = parseFloat(parseFloat(price * app.state.discount).toFixed(3))
-  const discount = parseFloat(parseFloat(price - sell).toFixed(3))
+  const price = cart.item.price_cents/100 * app.state.shopCarts[index].quantity
+  const sell = price * app.state.discount
+  const discount = price - sell
   
   return (
     <div className="cart_window_card">
@@ -19,17 +19,17 @@ export default function Cart({ app, page, index, cart }) {
         <div className="col-1">
           <Quantity passClass=" " page={page} index={index} quantity={app.state.shopCarts[index].quantity}/>
         </div>
-        <div className="col-2">${price}</div>
+        <div className="col-2">${price.toFixed(2)}</div>
       </div>
       { discount !== 0 &&
         <Fragment>
         <div className="line-rel" >
           <div className="col-1">Discount:</div>
-          <div className="col-2">${discount}</div>
+          <div className="col-2">${discount.toFixed(2)}</div>
         </div>
         <div className="line-rel" >
           <div className="col-1">Sell Price:</div>
-          <div className="col-2">${sell}</div>
+          <div className="col-2">${sell.toFixed(2)}</div>
         </div>
         </Fragment>
       }

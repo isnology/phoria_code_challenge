@@ -1,4 +1,4 @@
 class V1::ItemSerializer < ActiveModel::Serializer
-  attributes :id, :name, :quality, :price_cents
+  attributes :id, :name, :quality, :price_cents, :image
   
 end

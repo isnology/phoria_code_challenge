@@ -3,7 +3,8 @@ class V1::OrderController < ApiController
   before_action :set_order, only: [:show, :update]
   
   def index
-    render json: Order.where(user_id: current_user.id), adapter: :json, status: :ok
+    render json: Order.where(user_id: current_user.id).includes(lines: [:item]),
+           adapter: :json, status: :ok
   end
 
   def show
@@ -11,7 +12,7 @@ class V1::OrderController < ApiController
   end
 
   def create
-    carts = current_user.cart.includes(:item).all
+    carts = Cart.where(user_id: current_user.id).includes(:item)
     total, lines = build_lines(carts)
     promotion = Promotion.where('quantity < ?', total).order(quantity: :desc).first
     order = Order.new(user: current_user,
@@ -26,7 +27,7 @@ class V1::OrderController < ApiController
             render json: line.errors, status: :unprocessable_entity && return
           end
         end
-        carts.destroy
+        Cart.where(user_id: current_user.id).destroy_all
         render json: order, adapter: :json, status: :created
       else
         render json: order.errors, status: :unprocessable_entity
@@ -46,7 +47,7 @@ class V1::OrderController < ApiController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:user_id)
+    params.require(:order).permit(:id, :discount, :shipping_cents, :user_id)
   end
 
   def set_order

@@ -53,7 +53,8 @@ export default class ShoppingCart extends Component {
     this.doUpdates()
     orderCreate()
     .then((res) => {
-        this.app.onLoadCart()
+      this.app.onLoadCart()
+      this.app.setState({displayCart: false})
   })}
   
   

@@ -5,7 +5,7 @@ export function orderIndex() {
   csrf()
   return api.get('/v1/order')
   .then((res) => {
-    return res.data
+    return res.data.orders
   })
 }
 

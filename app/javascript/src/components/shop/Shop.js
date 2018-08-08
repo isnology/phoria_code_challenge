@@ -52,6 +52,9 @@ export default class Shop extends Component {
           <div className="btn btn--navbar" onClick={ this.app.onSignOut }>
             Sign Out
           </div>
+          <Link to="/order" className="btn btn--navbar btn--react-link" onClick={this.app.onLoadOrder} >
+            My Orders
+          </Link>
           { !display &&
             <div className="btn btn--navbar" onClick={ this.onClick }>
               Shopping Cart
