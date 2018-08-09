@@ -12,7 +12,12 @@
 
 class Promotion < ApplicationRecord
   
-  def self.record(user)
-    Promotion.where('quantity < ?', Cart.total(user)).order(quantity: :desc).first
+  def self.record(total)
+    Promotion.where('quantity < ?', total).order(quantity: :desc).first
+  end
+  
+  def self.list
+    Promotion.all.order(quantity: :desc)
   end
 end
+#

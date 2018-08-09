@@ -3,7 +3,7 @@ class V1::OrderController < ApiController
   before_action :set_order, only: [:show, :update]
   
   def index
-    render json: Order.where(user_id: current_user.id).includes(lines: [:item]),
+    render json: Order.where(user_id: current_user.id).includes(lines: [:item]).order(id: :desc),
            adapter: :json, status: :ok
   end
 
@@ -14,7 +14,7 @@ class V1::OrderController < ApiController
   def create
     carts = Cart.where(user_id: current_user.id).includes(:item)
     total, lines = build_lines(carts)
-    promotion = Promotion.where('quantity < ?', total).order(quantity: :desc).first
+    promotion = Promotion.record(total)
     order = Order.new(user: current_user,
                       discount: promotion.discount,
                       shipping_cents: promotion.shipping_cents)

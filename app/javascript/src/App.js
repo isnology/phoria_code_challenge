@@ -106,3 +106,8 @@ export default class App extends Component {
   }
   
 }
+// how to set state and continue once done.
+// this.setState({ name: 'Kris' }, () => {
+//   // prints 'Kris'
+//   console.log(this.state.name);
+// })

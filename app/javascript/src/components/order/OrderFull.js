@@ -7,7 +7,7 @@ export default function OrderFull({ app, page, order }) {
   return(
     <div className="order_full">
       <OrderHeader app={app} page={page} order={order}/>
-      <table className="order_table">
+      <table className="order_table no-spacing">
         <thead>
           <tr>
             <th>Line #</th>

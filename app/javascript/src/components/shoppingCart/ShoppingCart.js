@@ -54,7 +54,7 @@ export default class ShoppingCart extends Component {
     orderCreate()
     .then((res) => {
       this.app.onLoadCart()
-      this.app.setState({displayCart: false})
+      this.app.setState({ displayCart: false })
   })}
   
   

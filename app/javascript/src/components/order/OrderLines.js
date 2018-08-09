@@ -21,27 +21,21 @@ export default function OrderLines({ app, page, order }) {
       )})}
       { order.shipping_cents !== 0 &&
         <Fragment>
-          <tr>
-            <td>.</td>
-          </tr>
-          <tr>
+          <tr className="space">
             <td>Shipping</td>
             <td></td>
             <td></td>
             <td></td>
-            <td>${ order.shipping_cents / 100 }</td>
+            <td className="right2">${ (order.shipping_cents / 100).toFixed(2) }</td>
             <td></td>
             <td></td>
-            <td>${Math.round(shippingGst/100)}</td>
-            <td>${Math.round(shippingWithGst/100)}</td>
+            <td className="right2">${Math.round(shippingGst/100).toFixed(2)}</td>
+            <td className="right2">${Math.round(shippingWithGst/100).toFixed(2)}</td>
           </tr>
         </Fragment>
       }
-      <tr>
-        <td>.</td>
-      </tr>
-      <tr>
-        <td>Totals</td>
+      <tr className="space">
+        <td>Total</td>
         <td></td>
         <td></td>
         <td></td>
@@ -49,7 +43,7 @@ export default function OrderLines({ app, page, order }) {
         <td></td>
         <td></td>
         <td></td>
-        <td>${Math.round(gstTotal/100)}</td>
+        <td className="right2">${Math.round(gstTotal/100).toFixed(2)}</td>
       </tr>
     </Fragment>
   )

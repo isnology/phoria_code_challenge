@@ -14,11 +14,4 @@ class Cart < ApplicationRecord
   belongs_to :item
   belongs_to :user
   
-  attr_reader :total
-
-  def self.total(user)
-    total = Cart.where(user_id: user.id).group(:user_id).sum(:quantity)
-    total[user.id] ? total[user.id] : 1
-  end
-  
 end

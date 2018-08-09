@@ -10,12 +10,12 @@ export default function Line({ app, page, index, line, discount }) {
       <td>{index + 1}<p hidden>line.id</p></td>
       <td>{line.item.name}</td>
       <td>{line.item.quality}</td>
-      <td>{line.quantity}</td>
-      <td>${line.price_cents/100}</td>
-      <td>${(extended /100)}</td>
-      <td>${disc/100}</td>
-      <td>${gst/100}</td>
-      <td>${(gst + disc)/100}</td>
+      <td className="right4">{line.quantity}</td>
+      <td className="right2">${(line.price_cents/100).toFixed(2)}</td>
+      <td className="right4">${(extended /100).toFixed(2)}</td>
+      <td className="right4">${(disc/100).toFixed(2)}</td>
+      <td className="right2">${(gst/100).toFixed(2)}</td>
+      <td className="right2">${((gst + disc)/100).toFixed(2)}</td>
     </tr>
   )
 }
