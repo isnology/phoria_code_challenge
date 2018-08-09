@@ -1,4 +1,4 @@
-# Set download this repo and run it in development mode on your PC.
+# To download this repo and run it in development mode on your PC.
 
 - check to see if you have foreman installed as follows:-
 ```
