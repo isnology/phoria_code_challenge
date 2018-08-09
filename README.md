@@ -1,5 +1,7 @@
 # To download this repo and run it in development mode on your PC.
 
+- You need Ruby 2.5.0 and Rails 5.1 to run this app.
+
 - check to see if you have foreman installed as follows:-
 ```
 foreman -v
