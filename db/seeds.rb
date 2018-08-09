@@ -6,8 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Item.create([
-  {name: 'VR Cardboard', quality: 'High', price_cents: 2000, image: 'corrugated-board-1.jpg'},
-  {name: 'VR Cardboard', quality: 'Premium', price_cents: 3000, image: 'corrugated-board-2.jpg'}
+  {name: 'Cardboard 1', quality: 'High', price_cents: 2000, image: 'corrugated-board-1.jpg'},
+  {name: 'Cardboard 2', quality: 'Premium', price_cents: 3000, image: 'corrugated-board-2.jpg'},
+  {name: 'Cardboard 3', quality: 'High', price_cents: 2000, image: 'corrugated-board-1.jpg'},
+  {name: 'Cardboard 4', quality: 'Premium', price_cents: 3000, image: 'corrugated-board-2.jpg'}
 ])
 
 Tax.create({category: 'GST', rate: 0.1})
