@@ -1,197 +1,87 @@
-# Set Up Devise with React.js and Sessions
+# Set download this repo and run it in development mode on your PC.
 
-- from command line - rails new [project name] --webpack=react --database=postgresql -T
-- you can add "--skip-sprockets" directive to disabling the asset pipeline (if you want to solely use webpack 
-instead) but it will fail on heroku by default so further action is required if you want to go this route.
+- check to see if you have foreman installed as follows:-
+```
+foreman -v
+```
+if you have it, a version number will display e.g. 0.84.0  or similar
 
-- create a Procfile.dev in the root directory of the app and add the following lines to it.
-```
-webpacker: ./bin/webpack-dev-server
-```
-- if you don't have foreman installed then install into your home directory (out side your app) as follows:-
+- if you don't have foreman installed on your system then install into your home directory (out side your app) as 
+follows:-
 ```
 gem install foreman
 ```
-- back inside your app...
-- from command line:-
+Foreman makes the variables in your .env file available to React.js.
+
+- Do the same with yarn
 ```
-rails g controller init index
+yarn -v
+```
+- if you don't have it you can follow these instructions at
+  https://yarnpkg.com/en/docs/install
+  
+- do the same with git
+```
+git --version
+```  
+if you have it you should see some thing like:- 
+```
+git version 2.4.3
+```
+- If you don't have it then install it from 
+  https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+  
+- navigate to where you want to create a copy of this repo. (this process will create the repo directory.)
+  
+- Choose either ssh or https and type on the command line ONE of the following:-
+- for ssh
+```
+git clone git@github.com:isnology/phoria_code_challenge.git
+```
+or https
+```
+git clone https://github.com/isnology/phoria_code_challenge.git
+```
+- navigate into the repo (app) directory
+
+- in the root directory of the app, create a '.env' file and add the following to it.
+  (note it must start with a '.' (dot) and have no file extension)
+```
+API_SERVER_URL=http://0.0.0.0:3000
+```
+- on the command line (within your app) run the following commands.
+```
+yarn install
+bundle install
+rails db:migrate
+rails db:seed
+```
+- you should now be ready to run this server.
+- make sure nothing is running on ports 3000 and 3036
+
+- On the command line type 
+```
+yarn dev
+```
+you should see the react compile messages. The last message should be:-
+```
+webpack: Compiled successfully.
 ``` 
-- edit config/routes.rb and add:-
-```
-root "init#index"
-```
-- edit app/views/init/index.html.erb and replace with the following:-
-```
-<div id="root"></div>
-<%= javascript_pack_tag 'application' %>
-```
-- create app/javascript/src directory
-- delete app/javascript/packs/hello_react.jsx
-- edit app/javascript/packs/application.js and replace with:-
-```
-console.log('Hello World from Webpacker')
-import "../src"
-```
-- create app/javascript/src/index.js and add the following in it:-
-```
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+- in another command window from within your app type
 ```
-- from command line:- 
+rails s
 ```
-yarn add react-router-dom
+you should see the server start messages. The last message should be:-
 ```
-- copy everything from app/javascript/src (including the directories) to your project
-- rename app/assets/stylesheets/application.css to application.scss
-- copy contents of app/assets/stylesheets/application.scss to your project
+Use Ctrl-C to stop
+```
+- In your web browser navigate to:-
+localhost:3000
+- You should be taken to the shop. Sign Up/in to get full access.
 
-# OR you can use scss within react by:-
-- create app/javascript/src/styles directory
-- create app/javascript/src/styles/app.scss file
-- add contents as above
-- add the following import to app/javascript/src/App.js
-```
-import './styles/app.scss'
-```
-- in app/views/init/index.html.erb add the following line:-
-```
-<%= stylesheet_pack_tag 'application' %>
-``` 
-so it looks like this:-
-```
-<div id="root"></div>
-<%= javascript_pack_tag 'application' %>
-<%= stylesheet_pack_tag 'application' %>
-```
-
-# If you want to move all JS to webpack (not recomended as problems with heroku deployment)
-- remove the following gems from the gemfile
-```
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
-gem 'turbolinks'
-```
-- add the node packages
-```
-yarn add rails-ujs turbolinks
-```
-- in app/javascript/packs/application.js
-```
-import Rails from 'rails-ujs'
-import Turbolinks from 'turbolinks'
-
-Rails.start()
-Turbolinks.start()
-```
-- to add bootstrap (you need jquery at the moment):-
-```
-yarn add jquery bootstrap@4.0.0 popper.js
-``` 
-- in app/config/webpack/environment.js
-```
-const webpack = require('webpack')
-
-environment.plugins.set('Provide', new webpack.ProvidePlugin({
-  $: 'jquery',
-  jQuery: 'jquery',
-  Popper: ['popper.js', 'default']
-}))
-```
-- import bootstrap in  app/javascript/packs/application.js
-```
-import 'bootstrap/dist/js/bootstrap'
-```
-- in app/javascript/src/styles/app.scss
-```
-@import '~bootstrap/scss/bootstrap';
-```
-- to see full instructions
-https://medium.com/@coorasse/goodbye-sprockets-welcome-webpacker-3-0-ff877fb8fa79
-
-- Note
-- if you use scss from rails you need to refresh the browser to see changes but from react it's automatic
-- advantages of using rails is that gems are easy to install for scss
-
-- copy directories and files from app/javascript/src/api and app/javascript
-
-# Add Devise and rails serializer
-- in gem file:
- ```
-gem 'devise' 
-gem 'active_model_serializers', '~> 0.9.7'
- ```
- - bundle install
- - from command line:
-```
-rails generate devise:install
-```
-- in config/environments/development.rb:-
-```
-config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-```
-- in config/application.rb
-```
-...
-config.to_prepare do
-  DeviseController.respond_to :html, :json
-end
-...
-```
-- create an api_controller.rb file in controllers dirctory as follows:
-```
-class ApiController < ActionController::API
-  include ::ActionController::Serialization
-  respond_to :json
-end
-``` 
-- add an 'api' sub directory to the 'controllers' directory
-- on command line:-
-```
-rails generate devise User
-rails g controller api/Auth index
-```
-- change the AuthController class to:
-```
-class Api::AuthController < ApiController
-```
-- in routes.rb
-```
-devise_for :users, defaults: { format: :json }
-
-namespace :api, defaults: { format: :json } do
-
-  scope :auth do
-    get 'is_signed_in', to: 'auth#index'
-  end
-end
-```
-- also add (to the bottom) a catch all route
-```
-get '*path', to: 'init#index'
-```
-- in app/controllers/application_controller.rb - change exception to null_session:
-```
-class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
-end
-```
-
-- note, in app/javascript/src/api/init.js that axios uses "withCredentials: true" and the csrf function (used in 
-app/javascript/src/api/init.js)
-
-- also note that everything in app/javascript/src/components is for testing the sign in sign out sign up process
+# Assumptions
+1. It is only a demonstration app, not a production app.
+2. It uses primary key as order number
+3. There is no delete of order lines (therefore no need for line numbers on the record as a user reference)
  
-# to start the babel server run the following command
-
-foreman start -f Procfile.dev
-
-- forman loads up the .env variables so they are accessible with process.env.xxxxxx inside react (no need for dotenv 
-module)
-
-- You will also need to start the Rails server

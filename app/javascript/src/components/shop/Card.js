@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import Button from '../shared/Button'
 import Quantity from '../shared/Quantity'
 import {onAddCart} from './Shop'
@@ -21,8 +21,10 @@ export default function Card({ app, page, index, card }) {
     <div className="line-center">
       <h3 className="shop_window_card-text"> ${(card.price_cents/100) * app.state.cards[index].quantity}</h3>
     </div>
-    <div className="line-center">
-      <Button onClick={() => page.onAddCart(card, index)} >Add to Cart</Button>
-    </div>
+    {app.signedIn() &&
+      <div className="line-center">
+        <Button onClick={() => page.onAddCart(card, index)} >Add to Cart</Button>
+      </div>
+    }
   </div>
 )}

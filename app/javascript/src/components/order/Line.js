@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 
 
 export default function Line({ app, page, index, line, discount }) {

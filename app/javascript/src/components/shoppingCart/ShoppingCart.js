@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react'
-import {Link, Redirect} from 'react-router-dom'
 import CartHeader from './CartHeader'
 import Carts from './Carts'
 import { cartDelete, cartUpdate } from "../../api/cart"
@@ -59,8 +58,6 @@ export default class ShoppingCart extends Component {
   
   
   render() {
-    if (!this.app.signedIn()) {return (<Redirect to="/" />)}
-    
     return (
       <Fragment>
         { this.app.state.displayCart &&

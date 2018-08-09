@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { isSignedIn, signOut } from './api/auth'
 import Main from './components/Main'
 import { shopIndex } from './api/shop'
@@ -102,7 +102,6 @@ export default class App extends Component {
   componentDidMount() {
     this.ifSignedIn()
     this.onLoadShop()
-    this.onLoadCart()
   }
   
 }

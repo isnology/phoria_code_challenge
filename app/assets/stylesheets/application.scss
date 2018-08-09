@@ -12,11 +12,8 @@ html {
   font-size: 62.5%; /* 16px default changed to 10px (10px = 1rem)*/
 }
 
-
 body {
   box-sizing: border-box;
-  //background: $background;
-  //background: black;
   font-size: 1.6rem;
 }
 
@@ -57,19 +54,12 @@ body {
   display: flex;
   border-bottom: .3rem solid $main-website-blue;
 
-
   &_logo {
     display: flex;
     align-self: flex-start;
     width: 40rem;
     min-width: 33rem;
     color: red;
-
-    //&-img {
-    //  display: inline-block;
-    //  max-width: 30rem;
-    //  margin: -1rem .5rem -1rem .5rem;
-    //}
   }
 
   &_nav {
@@ -81,16 +71,6 @@ body {
     &-item {
       display: inline-block;
       margin: 0 .5rem 0 .5rem;
-
-      //position: relative;
-      //top: 0;
-      //text-align: center;
-      //font-size: 1.5rem;
-      //padding: .5rem;
-
-      //&:not(:last-child) {
-      //  border-bottom: 1px solid gray;
-      //}
     }
   }
 }
@@ -129,19 +109,11 @@ body {
       max-width: 35rem;
       margin: 1rem;
 
-      //&-board {
-      //  width: 60%;
-      //  height: 20rem;
-      //  margin-top: 1rem;
-      //  background: brown;
-      //}
-
       &-img {
         margin-top: 1rem;
         max-width: 90%;
         height: 20rem;
       }
-
 
       &-line {
         display: flex;
@@ -206,6 +178,42 @@ body {
   height: 100%;
 }
 
+.signin {
+  width: 100%;
+  height: 100vh;
+  display: block;
+  background: $gray;
+
+  &_window {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 30rem;
+    height: 35rem;
+    transform: translate(-50%, -50%);
+    background: $background;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+    label {
+      font-size: 2rem;
+      width: 25rem;
+      margin: .5rem;
+    }
+    input {
+      font-size: 2rem;
+      width: 25rem;
+    }
+
+    .btn {
+      //max-width: 15rem;
+      margin: .5rem auto
+    }
+  }
+
+}
+
 .cart {
   right: 0;
   top: 5rem;
@@ -252,7 +260,6 @@ body {
       position: relative;
       display: block;
       background: $card-background;
-      //border: 2px solid $color-black;
       width: 96%;
       height: 15rem;
       margin: .5rem auto;
@@ -408,6 +415,5 @@ body {
       color: $off-white;
       padding: .6rem;
     }
-
   }
 }

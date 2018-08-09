@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Header from '../shared/Header'
 import Cards from './Cards'
 import Footer from './Footer'
 import ShoppingCart from '../shoppingCart/ShoppingCart'
-import Button from '../shared/Button'
-import { cartCreate, cartDelete } from "../../api/cart"
+import { cartCreate } from "../../api/cart"
 import _cloneDeep from 'lodash-es/cloneDeep'
 
 
@@ -14,7 +13,8 @@ export default class Shop extends Component {
   app = this.props.app
   
   onClick = () => {
-    this.app.setState(prevState => { return {displayCart: !prevState.displayCart}})
+    this.app.setState({displayCart: true})
+    this.app.onLoadCart()
   }
   
   onAddCart = (card, index) => {
@@ -43,22 +43,30 @@ export default class Shop extends Component {
   
   
   render() {
-    if (!this.app.signedIn()) {return (<Redirect to="/"/>)}
   
     const display = this.app.state.displayCart
     return (
       <div className="shop">
         <Header>
-          <div className="btn btn--navbar" onClick={ this.app.onSignOut }>
-            Sign Out
-          </div>
-          <Link to="/order" className="btn btn--navbar btn--react-link" onClick={this.app.onLoadOrder} >
-            My Orders
-          </Link>
-          { !display &&
+          { this.app.signedIn() &&
+            <div className="btn btn--navbar" onClick={ this.app.onSignOut }>
+              Sign Out
+            </div>
+          }
+          { this.app.signedIn() &&
+            <Link to="/order" className="btn btn--navbar btn--react-link" onClick={ this.app.onLoadOrder }>
+              My Orders
+            </Link>
+          }
+          { this.app.signedIn() && !display &&
             <div className="btn btn--navbar" onClick={ this.onClick }>
               Shopping Cart
             </div>
+          }
+          { !this.app.signedIn() &&
+            <Link to="/signin" className="btn btn--navbar btn--react-link" >
+              Sign In
+            </Link>
           }
         </Header>
         <div className="shop_window">

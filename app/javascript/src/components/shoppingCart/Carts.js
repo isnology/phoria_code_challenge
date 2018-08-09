@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import Cart from './Cart'
 import Button from '../shared/Button'
 
