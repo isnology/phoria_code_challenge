@@ -20,6 +20,7 @@ export default class App extends Component {
     displayCart: false,
     shopCarts: [],
     orders: [],
+    error: null,
   }
   
   signedIn = () => (!!this.state.user)

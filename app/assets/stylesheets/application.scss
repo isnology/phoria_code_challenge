@@ -212,6 +212,15 @@ body {
     }
   }
 
+  .error {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 2.5rem;
+    background: #ffbfba;
+    padding: 1rem;
+  }
 }
 
 .cart {
