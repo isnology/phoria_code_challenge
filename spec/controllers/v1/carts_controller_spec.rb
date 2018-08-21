@@ -1,7 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Api::v1::CartController, type: :controller do
+RSpec.describe V1::CartsController, type: :controller do
+  include Devise::Test::IntegrationHelpers
 
+  before :all do
+    @user = create(:user)
+    sign_in @user
+  end
+  
+  
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -11,7 +18,7 @@ RSpec.describe Api::v1::CartController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show
+      get :show, id: 1
       expect(response).to have_http_status(:success)
     end
   end

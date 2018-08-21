@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, defaults: { format: :json }
   
   namespace :v1, defaults: { format: :json } do
-    resources :profile, only: [:show, :create, :update]
-    resources :shop, only: [:index, :show]
-    resources :cart, only: [:index, :show, :create, :update, :destroy]
-    resources :order, only: [:index, :show, :create, :update]
+    resources :profiles, only: [:show, :create, :update]
+    resources :shops, only: [:index]
+    resources :carts, only: [:index, :show, :create, :update, :destroy]
+    resources :orders, only: [:index, :show, :create, :update]
     get 'is_signed_in', to: 'auth#index'
   end
   

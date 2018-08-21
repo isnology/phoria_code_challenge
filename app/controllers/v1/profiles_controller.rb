@@ -1,4 +1,4 @@
-class V1::ProfileController < ApiController
+class V1::ProfilesController < ApiController
   before_action :authenticate_user!, only: [:show, :create, :update]
   before_action :set_profile, only: [:show, :update]
   

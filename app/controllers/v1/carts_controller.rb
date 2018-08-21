@@ -1,4 +1,4 @@
-class V1::CartController < ApiController
+class V1::CartsController < ApiController
   before_action :authenticate_user!, only: [:index, :show, :create, :update, :destroy]
   before_action :set_cart, only: [:show, :update, :destroy]
   

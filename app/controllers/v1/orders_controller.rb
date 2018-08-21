@@ -1,4 +1,4 @@
-class V1::OrderController < ApiController
+class V1::OrdersController < ApiController
   before_action :authenticate_user!, only: [:index, :show, :create, :update, :destroy]
   before_action :set_order, only: [:show, :update]
   
